@@ -1,0 +1,17 @@
+D:\Dev\WPDev\DZAppBooster\AlfanousWP7\AlfanousWP7\Bin\Debug\ApplicationIcon.png
+D:\Dev\WPDev\DZAppBooster\AlfanousWP7\AlfanousWP7\Bin\Debug\Background.png
+D:\Dev\WPDev\DZAppBooster\AlfanousWP7\AlfanousWP7\Bin\Debug\AlfanousWP7.dll
+D:\Dev\WPDev\DZAppBooster\AlfanousWP7\AlfanousWP7\Bin\Debug\AlfanousWP7.pdb
+D:\Dev\WPDev\DZAppBooster\AlfanousWP7\AlfanousWP7\Bin\Debug\AppManifest.xaml
+D:\Dev\WPDev\DZAppBooster\AlfanousWP7\AlfanousWP7\Bin\Debug\AlfanousWP7.xap
+D:\Dev\WPDev\DZAppBooster\AlfanousWP7\AlfanousWP7\Bin\Debug\Microsoft.Phone.Controls.dll
+D:\Dev\WPDev\DZAppBooster\AlfanousWP7\AlfanousWP7\Bin\Debug\Microsoft.Phone.Controls.xml
+D:\Dev\WPDev\DZAppBooster\AlfanousWP7\AlfanousWP7\obj\Debug\ResolveAssemblyReference.cache
+D:\Dev\WPDev\DZAppBooster\AlfanousWP7\AlfanousWP7\obj\Debug\App.g.i.cs
+D:\Dev\WPDev\DZAppBooster\AlfanousWP7\AlfanousWP7\obj\Debug\MainPage.g.i.cs
+D:\Dev\WPDev\DZAppBooster\AlfanousWP7\AlfanousWP7\obj\Debug\AlfanousWP7.g.resources
+D:\Dev\WPDev\DZAppBooster\AlfanousWP7\AlfanousWP7\obj\Debug\AlfanousWP7.dll
+D:\Dev\WPDev\DZAppBooster\AlfanousWP7\AlfanousWP7\obj\Debug\AlfanousWP7.pdb
+D:\Dev\WPDev\DZAppBooster\AlfanousWP7\AlfanousWP7\obj\Debug\Decl\AlfanousWP7.dll
+D:\Dev\WPDev\DZAppBooster\AlfanousWP7\AlfanousWP7\obj\Debug\Decl\AlfanousWP7.pdb
+D:\Dev\WPDev\DZAppBooster\AlfanousWP7\AlfanousWP7\obj\Debug\XapCacheFile.xml
