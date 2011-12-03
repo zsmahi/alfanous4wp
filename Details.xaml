@@ -23,49 +23,69 @@
         <Grid x:Name="ContentPanel" Margin="12,0,12,0" >
             <controls:Pivot Title="الفانوس">
                 <!--Pivot item one-->
-                <controls:PivotItem Header="الآية">
+                <controls:PivotItem Header="الآية" FlowDirection="RightToLeft">
                     <RichTextBox Name="textRtb" FontSize="50" FontFamily="Times New Roman" FontWeight="Bold" />
                 </controls:PivotItem>
 
-                <controls:PivotItem Header="تفاصيل الآية">
-                    <Grid>
+                <controls:PivotItem Header="تفاصيل الآية" FlowDirection="RightToLeft">
+                    <Grid Margin="20,20,5,5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="آية رقم"/>
-                        <TextBlock Text="{Binding Aya.Id}" Grid.Column="1"/>
-                        <TextBlock Text="صفحة" Grid.Row="1"/>
-                        <TextBlock Text="{Binding Position.Page}" Grid.Row="1" Grid.Column="1"/>
-                        <TextBlock Text="حزب" Grid.Row="2"/>
-                        <TextBlock Text="{Binding Position.Hizb}" Grid.Row="2" Grid.Column="1"/>
-                        <TextBlock Text="ربع" Grid.Row="3"/>
-                        <TextBlock Text="{Binding Position.Rubu}" Grid.Row="3" Grid.Column="1"/>
-                        <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Text="{Binding Stat}">
+                        <TextBlock Margin="5" Text="آية رقم" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
+                        <TextBlock Margin="5" Text="{Binding Aya.Id}" Grid.Column="1" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
+                        <TextBlock Margin="5" Text="صفحة" Grid.Row="1" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
+                        <TextBlock Margin="5" Text="{Binding Position.Page}" Grid.Row="1" Grid.Column="1" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
+                        <TextBlock Margin="5" Text="حزب" Grid.Row="2" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
+                        <TextBlock Margin="5" Text="{Binding Position.Hizb}" Grid.Row="2" Grid.Column="1" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
+                        <TextBlock Margin="5" Text="ربع" Grid.Row="3" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
+                        <TextBlock Margin="5" Text="{Binding Position.Rubu}" Grid.Row="3" Grid.Column="1" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
+                        <TextBlock Margin="5,15,5,5" Grid.Row="4" Grid.ColumnSpan="2" Text="{Binding Stat}" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold"
+                                   TextWrapping="Wrap">
                             <!--الآية تحتوي على <Run Text="{Binding Stat.Letters}"/> حرفا، <Run Text="{Binding Stat.Words}"/> كلمة و <Run Text="{Binding Stat.Godnames}"/> من أسماء الله الحسنى-->
                         </TextBlock>
-                        <TextBlock Text="{Binding Sajda}" Grid.Row="5" Grid.ColumnSpan="2"/>
+                        <TextBlock Margin="5,15,5,5" Text="{Binding Sajda}" Grid.Row="5" Grid.ColumnSpan="2" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
                     </Grid>
                 </controls:PivotItem>
-                <controls:PivotItem Header="تفاصيل السورة"></controls:PivotItem>
+                <controls:PivotItem Header="تفاصيل السورة" FlowDirection="RightToLeft">
+                    <Grid Margin="20,20,5,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Margin="5" Text="سورة" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
+                        <TextBlock Margin="5" Text="{Binding Sura.Name}" Grid.Column="1" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
+                        <TextBlock Margin="5" Text="{Binding Sura.Type}" Grid.Row="1" Grid.Column="1" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
+                        <TextBlock Margin="5" Text="ترتيب النزول" Grid.Row="2" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
+                        <TextBlock Margin="5" Text="{Binding Sura.Order}" Grid.Row="2" Grid.Column="1" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
+                        <TextBlock Margin="5,15,5,5" Text="{Binding Sura.Stat}" Grid.Row="3" Grid.ColumnSpan="2" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" 
+                                   TextWrapping="Wrap"/>
+                    </Grid>
+                </controls:PivotItem>
                 
                 <!--Pivot item two-->
-                <controls:PivotItem Header="ترجمة" FlowDirection="LeftToRight">
-                    <RichTextBox Name="translationRtb" FontSize="50" />
+                <controls:PivotItem Header="ترجمة" FlowDirection="RightToLeft">
+                    <RichTextBox Name="translationRtb" FontSize="40" />
                 </controls:PivotItem>
             </controls:Pivot>
             <MediaElement Name="mediaElement" Source="{Binding Aya.RecitationLink}" Grid.Row="2" Volume="5" AutoPlay="False" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <!--<TextBlock FontSize="40" FontFamily="/AlfanousWP7;component/Fonts/Fonts.zip#Traditional Arabic" >
-                فَمَا لَهُمْ عَنِ التَّذْكِرَةِ مُعْرِضِينَ
-            </TextBlock>-->
         	</Grid>
     </Grid>
  
