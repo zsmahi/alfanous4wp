@@ -11,29 +11,47 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Newtonsoft.Json.Linq;
+using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 
 namespace AlfanousWP7
 {
     public partial class Details : PhoneApplicationPage
     {
+        private SearchResultItem result;
+
         public Details()
         {
             InitializeComponent();
         }
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            var sura = NavigationContext.QueryString["sura"];
-            var aya = int.Parse(NavigationContext.QueryString["aya"]);
-            var client = new WebClient();
-            string detailsUrl = string.Format("http://www.alfanous.org/json?search=سورة:{0}+رقم_الآية:{1}", sura, aya);
-            client.DownloadStringCompleted += OnDownloadStringCompleted;
-            client.DownloadStringAsync(new Uri(detailsUrl));
+            result = Pipe.SearchResultItem;
+            DataContext = result;
+            textRtb.Xaml= GetFormattedText(result.Aya.Text);
+            translationRtb.Xaml = GetFormattedText(result.Aya.Translation);
+        }
+        private string GetFormattedText(string text)
+        {
+            var highlightStart = "<Run TextDecorations=\"Underline\" FontWeight=\"ExtraBlack\" Foreground=\"Green\" >";
+            var highlightEnd = "</Run>";
+            var actualFormattedText = text.Replace("<b>", highlightStart).Replace("</b>", highlightEnd);
+            var formattedText = "<Section xml:space=\"preserve\" HasTrailingParagraphBreakOnPaste=\"False\" xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"><Paragraph>" +
+                                 actualFormattedText +
+                                 "</Paragraph></Section>";
+            return formattedText;
         }
 
-        private void OnDownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        private void OnPlayButtonTap(object sender, EventArgs eventArgs)
         {
-            var token = JToken.Parse(e.Result);
-            var ayas = token[Constants.Ayas];
+            mediaElement.Play();
+        }
+        private void OnPauseButtonTap(object sender, EventArgs eventArgs)
+        {
+            mediaElement.Pause();
+        }
+        private void OnStopButtonTap(object sender, EventArgs eventArgs)
+        {
+            mediaElement.Stop();
         }
     }
 }

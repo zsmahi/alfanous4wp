@@ -19,18 +19,20 @@ namespace AlfanousWP7
         private void OnSearchButtonClick(object sender, RoutedEventArgs e)
         {
             var searchTerm = queryTextBox.Text;
+            if(string.IsNullOrWhiteSpace(searchTerm))
+                return;
             var url =
                 "http://www.alfanous.org/json?search=%D8%A7%D9%84%D8%AD%D9%85%D8%AF&highlight=bbcode&sortedby=tanzil&page=2&traduction=shakir&recitation=Mishary+Rashid+Alafasy";
             var url2 =
                 "http://www.alfanous.org/json?search=الجنة&sortedby=tanzil&page=2&traduction=shakir&recitation=Mishary+Rashid+Alafasy&highlight=bold";
             var queryUrl =
                 string.Format(
-                    "http://www.alfanous.org/json?search={0}&sortedby=tanzil&page=2&traduction=shakir&recitation=Mishary+Rashid+Alafasy",
+                    "http://www.alfanous.org/json?search={0}&sortedby=mushaf&translation=shakir&recitation=Mishary+Rashid+Alafasy&highlight=bold",
                     searchTerm);
             var sajdaUrl = "http://www.alfanous.org/json?search=سجدة:نعم&traduction=shakir";
             var client = new WebClient();
             client.DownloadStringCompleted += OnDownloadStringCompleted;
-            client.DownloadStringAsync(new Uri(url2));
+            client.DownloadStringAsync(new Uri(queryUrl));
         }
 
         private void OnDownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -50,12 +52,14 @@ namespace AlfanousWP7
                                                     {
                                                         Id = aya[Constants.Id].Value<int?>(),
                                                         UthmaniText = aya[Constants.TextUthmani].ToString(),
-                                                        Translation = aya[Constants.Traduction].ToString()
+                                                        Text = aya[Constants.Text].ToString(),
+                                                        Translation = aya[Constants.Traduction].ToString(),
+                                                        RecitationLink = aya[Constants.RecitationLink].ToString()
                                                     },
                                           Sura = new Sura
                                                      {
                                                          Id = sura[Constants.Id].Value<int?>(),
-                                                         Name = sura[Constants.Name].ToString(),
+                                                         Name = sura[Constants.Name].ToString().Replace("<b>","").Replace("</b>",""),
                                                          Type = sura[Constants.Type].ToString(),
                                                          Order = sura[Constants.Order].Value<int?>(),
                                                          Stat = new SuraStat
@@ -99,10 +103,8 @@ namespace AlfanousWP7
         private void OnResultsListBoxItemTap(object sender, GestureEventArgs e)
         {
             var selectedAya = (SearchResultItem) resultsListBox.SelectedItem;
-            var queryString = String.Format("sura={0}&aya={1}", selectedAya.Sura.Name, selectedAya.Aya.Id);
-            var detailsUriString = string.Format("/Details.xaml?{0}", queryString);
-            var detailsUri = new Uri(detailsUriString, UriKind.Relative);
-            NavigationService.Navigate(detailsUri);
+            Pipe.SearchResultItem = selectedAya;
+            NavigationService.Navigate(new Uri("/Details.xaml",UriKind.Relative));
         }
     }
 }

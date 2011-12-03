@@ -2,6 +2,8 @@
 {
     public class Constants
     {
+        public const string RecitationLink = "recitation";
+        public const string Text="text";
         public const string Hizb="hizb";
         public const string Manzil="manzil";
         public const string Page="page";
@@ -20,8 +22,8 @@
         public const string Ayas = "ayas";
         public const string Name = "name";
         public const string Id = "id";
-        public const string Type = "Type";
-        public const string Order = "Order";
+        public const string Type = "type";
+        public const string Order = "order";
         public const string Stat = "stat";
         public const string Theme = "theme";
         public const string Position = "position";

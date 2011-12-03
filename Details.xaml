@@ -6,41 +6,79 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     FlowDirection="RightToLeft"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    toolkit:TiltEffect.IsTiltEnabled="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,17,12,28">
-            <TextBlock x:Name="ApplicationTitle" Text="الفانوس" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="نتائج البحث" Margin="0,-7,9,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
-
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"></Grid>
+        <Grid x:Name="ContentPanel" Margin="12,0,12,0" >
+            <controls:Pivot Title="الفانوس">
+                <!--Pivot item one-->
+                <controls:PivotItem Header="الآية">
+                    <RichTextBox Name="textRtb" FontSize="50" FontFamily="Times New Roman" FontWeight="Bold" />
+                </controls:PivotItem>
+
+                <controls:PivotItem Header="تفاصيل الآية">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="آية رقم"/>
+                        <TextBlock Text="{Binding Aya.Id}" Grid.Column="1"/>
+                        <TextBlock Text="صفحة" Grid.Row="1"/>
+                        <TextBlock Text="{Binding Position.Page}" Grid.Row="1" Grid.Column="1"/>
+                        <TextBlock Text="حزب" Grid.Row="2"/>
+                        <TextBlock Text="{Binding Position.Hizb}" Grid.Row="2" Grid.Column="1"/>
+                        <TextBlock Text="ربع" Grid.Row="3"/>
+                        <TextBlock Text="{Binding Position.Rubu}" Grid.Row="3" Grid.Column="1"/>
+                        <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Text="{Binding Stat}">
+                            <!--الآية تحتوي على <Run Text="{Binding Stat.Letters}"/> حرفا، <Run Text="{Binding Stat.Words}"/> كلمة و <Run Text="{Binding Stat.Godnames}"/> من أسماء الله الحسنى-->
+                        </TextBlock>
+                        <TextBlock Text="{Binding Sajda}" Grid.Row="5" Grid.ColumnSpan="2"/>
+                    </Grid>
+                </controls:PivotItem>
+                <controls:PivotItem Header="تفاصيل السورة"></controls:PivotItem>
+                
+                <!--Pivot item two-->
+                <controls:PivotItem Header="ترجمة" FlowDirection="LeftToRight">
+                    <RichTextBox Name="translationRtb" FontSize="50" />
+                </controls:PivotItem>
+            </controls:Pivot>
+            <MediaElement Name="mediaElement" Source="{Binding Aya.RecitationLink}" Grid.Row="2" Volume="5" AutoPlay="False" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <!--<TextBlock FontSize="40" FontFamily="/AlfanousWP7;component/Fonts/Fonts.zip#Traditional Arabic" >
+                فَمَا لَهُمْ عَنِ التَّذْكِرَةِ مُعْرِضِينَ
+            </TextBlock>-->
+        	</Grid>
     </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
+    <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
-            </shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarIconButton IconUri="appbar.play.png" Text="Play"
+                                            Click="OnPlayButtonTap" />
+            <shell:ApplicationBarIconButton IconUri="appbar.pause.png" Text="Pause"
+                                            Click="OnPauseButtonTap" />
+            <shell:ApplicationBarIconButton IconUri="appbar.sign.stop.png" Text="Stop"
+                                            Click="OnStopButtonTap" />
         </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>
