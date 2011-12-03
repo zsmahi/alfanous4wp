@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="AlfanousWP7.Search"
+    x:Class="AlfanousWP7.Details"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -11,8 +11,8 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True"
-    FlowDirection="RightToLeft">
+    FlowDirection="RightToLeft"
+    shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -24,44 +24,11 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,17,12,28">
             <TextBlock x:Name="ApplicationTitle" Text="الفانوس" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="بحث" Margin="0,-7,9,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Text="نتائج البحث" Margin="0,-7,9,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-        	<Grid.RowDefinitions>
-        		<RowDefinition Height="auto"/>
-        		<RowDefinition Height="*"/>
-        	</Grid.RowDefinitions>
-        	<Grid d:LayoutOverrides="Height">
-        		<Grid.ColumnDefinitions>
-        			<ColumnDefinition Width="*"/>
-        			<ColumnDefinition Width="auto"/>
-        		</Grid.ColumnDefinitions>
-        		<TextBox Height="68" 
-                         Name="queryTextBox"/>
-        		<Button Content="Button"
-                        Grid.Column="1" 
-                        Style="{StaticResource SearchButton}"
-                        Width="48"
-                        Height="48"
-                        Name="SearchButton" Click="OnSearchButtonClick" />
-        	</Grid>
-            <ListBox Grid.Row="1" 
-                     Name="resultsListBox" FlowDirection="RightToLeft"
-                     Tap="OnResultsListBoxItemTap">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel FlowDirection="RightToLeft" Margin="4,10,4,4" HorizontalAlignment="Right" >
-                            <TextBlock Text="{Binding Aya.UthmaniText}" Margin="4" FontSize="35"
-                                       TextWrapping="Wrap"/>
-                            <TextBlock Text="{Binding Sura.Name, StringFormat='سورة : {0}'}" Margin="4"/>
-                            <TextBlock Text="{Binding Aya.Id, StringFormat='الآية : {0}'}" Margin="4"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Grid>
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"></Grid>
     </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->
