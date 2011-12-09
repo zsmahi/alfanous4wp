@@ -1,3 +1,5 @@
+using AlfanousWP7.Helpers;
+
 namespace AlfanousWP7.AlfanousClasses
 {
     public class SuraStat:Stat
@@ -5,7 +7,7 @@ namespace AlfanousWP7.AlfanousClasses
         public int? Ayas { get; set; }
         public override string ToString()
         {
-            start = string.Format("ÇáÓæÑÉ ÊÍæí {0}¡ ", NumberToString(Ayas.Value, "ÂíÉ", "ÂíÊíä", "ÂíÇÊ"));
+            start = string.Format("ÇáÓæÑÉ ÊÍæí {0}¡ ", HelperMethods.NumberToString(Ayas.Value, "ÂíÉ", "ÂíÊíä", "ÂíÇÊ"));
             return base.ToString();
         }
     }

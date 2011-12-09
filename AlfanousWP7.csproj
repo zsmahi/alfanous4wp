@@ -63,6 +63,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlfanousClasses\AlfanousLists.cs" />
     <Compile Include="AlfanousClasses\Aya.cs" />
     <Compile Include="AlfanousClasses\Position.cs" />
     <Compile Include="AlfanousClasses\Sajda.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="AlfanousClasses\SuraStat.cs" />
     <Compile Include="AlfanousClasses\Sura.cs" />
     <Compile Include="AlfanousClasses\Theme.cs" />
+    <Compile Include="AlfanousSearchService.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -77,6 +79,7 @@
     <Compile Include="Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HelperMethods.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

@@ -81,8 +81,8 @@
                 </controls:PivotItem>
                 
                 <!--Pivot item two-->
-                <controls:PivotItem Header="ترجمة" FlowDirection="RightToLeft">
-                    <RichTextBox Name="translationRtb" FontSize="40" />
+                <controls:PivotItem Header="ترجمة" FlowDirection="RightToLeft" Name="translationTab" IsEnabled="True">
+                    <RichTextBox Name="translationRtb" FontSize="35" VerticalContentAlignment="Stretch" />
                 </controls:PivotItem>
             </controls:Pivot>
             <MediaElement Name="mediaElement" Source="{Binding Aya.RecitationLink}" Grid.Row="2" Volume="5" AutoPlay="False" HorizontalAlignment="Center" VerticalAlignment="Center" />
