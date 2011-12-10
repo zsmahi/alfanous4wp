@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AlfanousWP7.Helpers
 {
-    public class HelperMethods
+    public static class HelperMethods
     {
+        public static string Stringify(this IEnumerable<char> charEnumerable)
+        {
+            return new string(charEnumerable.ToArray());
+        }
         public static string NumberToString(int number, string single, string couple, string plural)
         {
             return number == 1

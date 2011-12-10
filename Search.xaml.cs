@@ -41,12 +41,14 @@ namespace AlfanousWP7
                     (TranslationEnumeration) IsolatedStorageSettings.ApplicationSettings[TranslationSettingsKey];
                 translationListPicker.SelectedItem =
                     AlfanousLists.Translations.Single(item => item.Value == translationKey);
+                searchService.Translation = translationKey;
             }
 
             if (IsolatedStorageSettings.ApplicationSettings.Contains(RecitationSettingsKey))
             {
-                var recitationKey = IsolatedStorageSettings.ApplicationSettings[RecitationSettingsKey];
+                var recitationKey = (string) IsolatedStorageSettings.ApplicationSettings[RecitationSettingsKey];
                 recitationListPicker.SelectedItem = recitationKey;
+                searchService.Recitation = recitationKey;
             }
         }
         private void OnSearchButtonClick(object sender, RoutedEventArgs e)

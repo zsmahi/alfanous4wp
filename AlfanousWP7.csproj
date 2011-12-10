@@ -76,6 +76,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\HighlightingConverter.cs" />
     <Compile Include="Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
@@ -131,6 +132,7 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\untitled.png" />
     <Content Include="Lib\Arabic.Controls.dll" />
     <Content Include="Lib\Arabic.Utils.dll" />
     <Content Include="Lib\Newtonsoft.Json.dll" />

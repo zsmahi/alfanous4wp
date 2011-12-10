@@ -21,10 +21,10 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Margin="12,0,12,0" >
-            <controls:Pivot Title="الفانوس">
+            <controls:Pivot Title="الفانوس" Name="pivot">
                 <!--Pivot item one-->
                 <controls:PivotItem Header="الآية" FlowDirection="RightToLeft">
-                    <RichTextBox Name="textRtb" FontSize="50" FontFamily="Times New Roman" FontWeight="Bold" />
+                    <ScrollViewer><RichTextBox Name="textRtb" FontSize="50" FontFamily="Times New Roman" FontWeight="Bold" /></ScrollViewer>
                 </controls:PivotItem>
 
                 <controls:PivotItem Header="تفاصيل الآية" FlowDirection="RightToLeft">
@@ -82,7 +82,9 @@
                 
                 <!--Pivot item two-->
                 <controls:PivotItem Header="ترجمة" FlowDirection="RightToLeft" Name="translationTab" IsEnabled="True">
-                    <RichTextBox Name="translationRtb" FontSize="35" VerticalContentAlignment="Stretch" />
+                    <ScrollViewer>
+                        <RichTextBox Name="translationRtb" FontSize="35" TextAlignment="Right" />
+                    </ScrollViewer>
                 </controls:PivotItem>
             </controls:Pivot>
             <MediaElement Name="mediaElement" Source="{Binding Aya.RecitationLink}" Grid.Row="2" Volume="5" AutoPlay="False" HorizontalAlignment="Center" VerticalAlignment="Center" />

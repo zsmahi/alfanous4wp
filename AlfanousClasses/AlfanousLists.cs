@@ -45,8 +45,15 @@ namespace AlfanousWP7.AlfanousClasses
 
         private static void OnRecitationListDownloadCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
-            Recitations= GetList(e.Result);
-            CheckAndFireCompletedEvent();
+            try
+            {
+                Recitations = GetList(e.Result);
+                CheckAndFireCompletedEvent();
+            }
+            catch (Exception ex)
+            {
+                
+            }
         }
 
         //private static void OnTranslationListDownloadCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -58,8 +65,15 @@ namespace AlfanousWP7.AlfanousClasses
 
         private static Dictionary<string, string> GetList(string jsonText)
         {
-            var jsonList = JToken.Parse(jsonText);
-            return jsonList.Select(item => item.ToString().Replace("\"", "").Split(':')).ToDictionary(item => item[0], item => item[1]);
+            try
+            {
+                var jsonList = JToken.Parse(jsonText);
+                return jsonList.Select(item => item.ToString().Replace("\"", "").Split(':')).ToDictionary(item => item[0], item => item[1]);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
 
