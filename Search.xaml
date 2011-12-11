@@ -46,21 +46,8 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Grid d:LayoutOverrides="Height">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox Height="68"
-                            Name="queryTextBox" />
-                        <Button Content="Button"
-                            Grid.Column="1"
-                            Style="{StaticResource SearchButton}"
-                            Width="48"
-                            Height="48"
-                            Name="SearchButton"
-                            Click="OnSearchButtonClick" />
-                    </Grid>
+                    <toolkit:PhoneTextBox Hint="مفردات البحث هنا ..." ActionIcon="/AlfanousWP7;component/appbar.magnify2.png" ActionIconTapped="PhoneTextBox_ActionIconTapped" 
+                                          Name="queryTextBox" />
                     <TextBlock Name="searchDetailsTB"
                         Grid.Row="1" />
                     <ListBox Grid.Row="2"

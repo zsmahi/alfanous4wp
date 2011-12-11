@@ -52,7 +52,9 @@
   <ItemGroup>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls" />
-    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
+      <HintPath>E:\DotNet stuff\Tools\Coding4Fun.Phone.Controls\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="Newtonsoft.Json, Version=4.0.4.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System.Windows" />
@@ -123,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="appbar.magnify.png" />
+    <Resource Include="appbar.magnify2.png" />
     <Content Include="appbar.pause.png" />
     <Content Include="appbar.play.png" />
     <Content Include="appbar.sign.stop.png" />

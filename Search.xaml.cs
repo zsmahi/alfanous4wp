@@ -104,5 +104,10 @@ namespace AlfanousWP7
             searchService.Recitation = recitationKey;
             IsolatedStorageSettings.ApplicationSettings[RecitationSettingsKey] = recitationKey;
         }
+
+        private void PhoneTextBox_ActionIconTapped(object sender, EventArgs e)
+        {
+            OnSearchButtonClick(this,null);
+        }
     }
 }
