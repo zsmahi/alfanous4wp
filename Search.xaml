@@ -45,8 +45,9 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
-                    <toolkit:PhoneTextBox Hint="مفردات البحث هنا ..." ActionIcon="/AlfanousWP7;component/appbar.magnify2.png" ActionIconTapped="PhoneTextBox_ActionIconTapped" 
+                    <toolkit:PhoneTextBox Hint="مفردات البحث هنا ..." ActionIcon="/AlfanousWP7;component/appbar.magnify2.png" ActionIconTapped="OnPhoneTextBoxActionIconTapped" 
                                           Name="queryTextBox" />
                     <TextBlock Name="searchDetailsTB"
                         Grid.Row="1" />
@@ -75,6 +76,9 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+                    <!--<Button Content="نتائج أخرى ..." Grid.Row="3"
+                            Name="moreResultsButton" Visibility="Collapsed"
+                            Tap="OnMoreResultsTap"/>-->
                 </Grid>
             </controls:PanoramaItem>
             <controls:PanoramaItem Header="خيارات">

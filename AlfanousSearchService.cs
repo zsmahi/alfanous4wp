@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using AlfanousWP7.AlfanousClasses;
@@ -6,23 +7,27 @@ using Newtonsoft.Json.Linq;
 
 namespace AlfanousWP7
 {
-    public class AlfanousSearchService
+    public class AlfanousSearchService : IAlfanousSearchService 
     {
         public string Recitation { get; set; }
         public TranslationEnumeration Translation { get; set; }
 
-        public void Search(string searchTerm, Action<SearchResults> callback)
+        public void Search(string searchTerm, int page, Action<SearchResults> callback)
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
                 return;
-            var queryUrl = GetQueryUrl(searchTerm);
+            var queryUrl = GetQueryUrl(searchTerm, page);
             var client = new WebClient();
             client.DownloadStringCompleted += OnDownloadStringCompleted;
             client.DownloadStringAsync(new Uri(queryUrl), callback);
         }
-        private string GetQueryUrl(string searchTerm)
+        private string GetQueryUrl(string searchTerm, int page)
         {
-            return string.Format("http://www.alfanous.org/json?search={0}&sortedby=mushaf{1}&recitation={2}&highlight=bold", searchTerm, GetTranslation(), Recitation);
+            return string.Format("http://www.alfanous.org/json?search={0}&sortedby=mushaf{1}&recitation={2}&highlight=bold&page={3}", 
+                       searchTerm, 
+                       GetTranslation(), 
+                       Recitation,
+                       page);
         }
         private string GetTranslation()
         {

@@ -19,7 +19,7 @@ namespace AlfanousWP7.AlfanousClasses
 
         private static void Initialize()
         {
-
+            return;
             InitializeRecitations();
             InitializeTranslations();
         }
@@ -50,7 +50,7 @@ namespace AlfanousWP7.AlfanousClasses
                 Recitations = GetList(e.Result);
                 CheckAndFireCompletedEvent();
             }
-            catch (Exception ex)
+            catch
             {
                 
             }
@@ -83,6 +83,11 @@ namespace AlfanousWP7.AlfanousClasses
                 ListDownloadComplete(null, null);
         }
     }
+
+    public interface IAlfanousLists
+    {
+    }
+
     public enum TranslationEnumeration
     {
         None,

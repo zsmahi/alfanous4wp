@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Windows;
@@ -15,12 +16,18 @@ namespace AlfanousWP7
     {
         private const string RecitationSettingsKey = "Recitation";
         public const string TranslationSettingsKey = "Translation";
-        private readonly AlfanousSearchService searchService=new AlfanousSearchService();
+        private readonly IAlfanousSearchService searchService = new FakeAlfanousSearchService();
+        private int currentPage;
+        private readonly Button moreResultsButton = new Button {Name = "moreResultsButton", Content = "نتائج أخرى ..."};
+
+        private ObservableCollection<object> searchResults;
+
         public Search()
         {
             InitializeComponent();
             progressBar.IsIndeterminate = true;
             AlfanousLists.ListDownloadComplete += OnListDownloadComplete;
+            moreResultsButton.Tap += OnMoreResultsTap;
         }
 
         private void OnListDownloadComplete(object sender, EventArgs e)
@@ -51,63 +58,90 @@ namespace AlfanousWP7
                 searchService.Recitation = recitationKey;
             }
         }
+
         private void OnSearchButtonClick(object sender, RoutedEventArgs e)
         {
+            currentPage = 0;
             var searchTerm = queryTextBox.Text;
             progressBar.IsIndeterminate = true;
-            searchService.Search(searchTerm, results =>
-                                                 {
-                                                     progressBar.IsIndeterminate = false;
-                                                     if (results.HasError)
-                                                     {
-                                                         searchDetailsTB.Text = "حدث خطأ، الرجاء إعادة المحاولة ...";
-                                                         return;
-                                                     }
-                                                     if (results.SearchResultItems == null || results.SearchResultItems.Count() == 0)
-                                                         searchDetailsTB.Text = "لا توجد أية نتائج للبحث ...";
-                                                     else
-                                                     {
-                                                         searchDetailsTB.Text =
-                                                             HelperMethods.NumberToString(
-                                                                 results.SearchResultItems.Count(), "نتيجة", "نتيجتان",
-                                                                 "نتائج");
-                                                     }
-                                                     resultsListBox.ItemsSource = results.SearchResultItems;
-                                                 });
-
+            searchService.Search(searchTerm,
+                                 currentPage,
+                                 results =>
+                                     {
+                                         progressBar.IsIndeterminate = false;
+                                         if (results.HasError)
+                                         {
+                                             searchDetailsTB.Text = "حدث خطأ، الرجاء إعادة المحاولة ...";
+                                             return;
+                                         }
+                                         if (results.SearchResultItems == null || results.SearchResultItems.Count() == 0)
+                                             searchDetailsTB.Text = "لا توجد أية نتائج للبحث ...";
+                                         else
+                                         {
+                                             searchDetailsTB.Text =
+                                                 HelperMethods.NumberToString(
+                                                     results.TotalResultCount, "نتيجة", "نتيجتان",
+                                                     "نتائج");
+                                         }
+                                         searchResults =
+                                             new ObservableCollection<object>(results.SearchResultItems.Cast<object>());
+                                         resultsListBox.ItemsSource = searchResults;
+                                         if (results.HasMore)
+                                             //moreResultsButton.Visibility = Visibility.Visible;
+                                             searchResults.Add(moreResultsButton);
+                                     });
         }
 
         private void OnResultsListBoxItemTap(object sender, GestureEventArgs e)
         {
             var selectedAya = (SearchResultItem) resultsListBox.SelectedItem;
-            if (selectedAya==null)
+            if (selectedAya == null)
                 return;
             Pipe.SearchResultItem = selectedAya;
-            NavigationService.Navigate(new Uri("/Details.xaml",UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Details.xaml", UriKind.Relative));
         }
 
         private void OnTranslationChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(translationListPicker.ItemsSource==null)
+            if (translationListPicker.ItemsSource == null)
                 return;
-            var translationKey = ((KeyValuePair<string, TranslationEnumeration>)translationListPicker.SelectedItem).Value;
+            var translationKey =
+                ((KeyValuePair<string, TranslationEnumeration>) translationListPicker.SelectedItem).Value;
             searchService.Translation = translationKey;
             IsolatedStorageSettings.ApplicationSettings[TranslationSettingsKey] = translationKey;
         }
 
         private void OnRecitationChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(recitationListPicker.ItemsSource==null)
+            if (recitationListPicker.ItemsSource == null)
                 return;
             //var recitationKey = ((KeyValuePair<string, string>)recitationListPicker.SelectedItem).Key;
-            var recitationKey = (string)recitationListPicker.SelectedItem;
+            var recitationKey = (string) recitationListPicker.SelectedItem;
             searchService.Recitation = recitationKey;
             IsolatedStorageSettings.ApplicationSettings[RecitationSettingsKey] = recitationKey;
         }
 
-        private void PhoneTextBox_ActionIconTapped(object sender, EventArgs e)
+        private void OnPhoneTextBoxActionIconTapped(object sender, EventArgs e)
         {
-            OnSearchButtonClick(this,null);
+            OnSearchButtonClick(this, null);
+        }
+
+        private void OnMoreResultsTap(object sender, GestureEventArgs e)
+        {
+            searchResults.Remove(moreResultsButton);
+            progressBar.IsIndeterminate = true;
+            currentPage++;
+            searchService.Search(queryTextBox.Text, currentPage, results =>
+                                                                       {
+                                                                           progressBar.IsIndeterminate = false;
+                                                                           foreach (
+                                                                               var item in results.SearchResultItems)
+                                                                               searchResults.Add(item);
+                                                                           if (results.HasMore)
+                                                                               //moreResultsButton.Visibility =
+                                                                               //    Visibility.Collapsed;
+                                                                               searchResults.Add(moreResultsButton);
+                                                                       });
         }
     }
 }

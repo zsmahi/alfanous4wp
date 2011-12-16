@@ -83,6 +83,7 @@
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HelperMethods.cs" />
+    <Compile Include="IAlfanousSearchService.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
