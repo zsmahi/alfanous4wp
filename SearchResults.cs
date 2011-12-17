@@ -6,15 +6,17 @@ namespace AlfanousWP7
 {
     public class SearchResults
     {
+
         public IEnumerable<SearchResultItem> SearchResultItems { get; set; }
         public int TotalResultCount { get; set; }
         public int CurrentPage { get; set; }
         public bool HasError { get; set; }
-        
+
         public bool HasMore
         {
-            get { return (CurrentPage-1)*10 + SearchResultItems.Count() < TotalResultCount; }
+            get { return LastFetched < TotalResultCount; }
         }
-        
+
+        public int LastFetched { get; set; }
     }
 }

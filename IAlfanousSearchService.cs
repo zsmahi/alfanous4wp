@@ -13,10 +13,12 @@ namespace AlfanousWP7
 
         public void Search(string searchTerm, int page, Action<SearchResults> callback)
         {
+            const int totalCount = 35;
             var searchResults = new SearchResults
                                     {
-                                        TotalResultCount = 35,
+                                        TotalResultCount = totalCount,
                                         CurrentPage = page,
+                                        LastFetched = page + 1*10,
                                         SearchResultItems = new[]
                                                                 {
                                                                     new SearchResultItem {Aya = new Aya {Text = "Aya", UthmaniText = "Aya Uthmani"}},

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using AlfanousWP7.AlfanousClasses;
@@ -56,6 +55,8 @@ namespace AlfanousWP7
             {
                 var token = JToken.Parse(e.Result);
                 var ayas = token[Constants.Ayas];
+                var totalCount = token[Constants.Interval][Constants.Total].Value<int>();
+                var lastFetched = token[Constants.Interval][Constants.End].Value<int>();
                 var results = (from result in ayas.Children()
                            let aya = result.First[Constants.Aya]
                            let sura = result.First[Constants.Sura]
@@ -124,7 +125,9 @@ namespace AlfanousWP7
                                                       }
                                       }
                           );
-                callback(new SearchResults{SearchResultItems = results, HasError = false});
+                //var hasMore = lastFetched < totalCount;
+                callback(new SearchResults
+                             {TotalResultCount = totalCount, SearchResultItems = results, HasError = false, LastFetched=lastFetched});
             }
             catch (Exception)
             {

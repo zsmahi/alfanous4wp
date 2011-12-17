@@ -2,6 +2,9 @@
 {
     public class Constants
     {
+        public const string End = "end";
+        public const string Interval = "interval";
+        public const string Total = "total";
         public const string RecitationLink = "recitation";
         public const string Text="text";
         public const string Hizb="hizb";

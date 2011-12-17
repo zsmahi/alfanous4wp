@@ -68,6 +68,7 @@
     <Compile Include="AlfanousClasses\AlfanousLists.cs" />
     <Compile Include="AlfanousClasses\Aya.cs" />
     <Compile Include="AlfanousClasses\Position.cs" />
+    <Compile Include="AlfanousClasses\Recitations.cs" />
     <Compile Include="AlfanousClasses\Sajda.cs" />
     <Compile Include="AlfanousClasses\Stat.cs" />
     <Compile Include="AlfanousClasses\SuraStat.cs" />

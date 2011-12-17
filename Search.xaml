@@ -27,11 +27,6 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"
         Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <toolkit:PerformanceProgressBar Name="progressBar" />
         <controls:Panorama Title="الفانوس">
             <controls:Panorama.Background>
                 <ImageBrush />
@@ -47,7 +42,7 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
-                    <toolkit:PhoneTextBox Hint="مفردات البحث هنا ..." ActionIcon="/AlfanousWP7;component/appbar.magnify2.png" ActionIconTapped="OnPhoneTextBoxActionIconTapped" 
+                    <toolkit:PhoneTextBox Hint="مفردات البحث هنا ..." ActionIcon="/AlfanousWP7;component/appbar.magnify2.png" ActionIconTapped="OnSearchIconTapped" 
                                           Name="queryTextBox" />
                     <TextBlock Name="searchDetailsTB"
                         Grid.Row="1" />
@@ -95,11 +90,19 @@
                     <toolkit:ListPicker Header="التلاوة"
                         Grid.Row="1"
                         FullModeHeader="التلاوات المتوفرة"
-                        Name="recitationListPicker">
+                        Name="recitationListPicker"
+                                        DisplayMemberPath="Value" >
+                        <toolkit:ListPicker.FullModeItemTemplate>
+                            <DataTemplate>
+                                <TextBlock FlowDirection="RightToLeft" Text="{Binding Value}" Margin="5" FontSize="26" />
+                            </DataTemplate>
+                        </toolkit:ListPicker.FullModeItemTemplate>
                     </toolkit:ListPicker>
                 </Grid>
             </controls:PanoramaItem>
         </controls:Panorama>
+        <toolkit:PerformanceProgressBar Name="progressBar" 
+                                        VerticalAlignment="Top" Margin="0,280,0,0" />
     </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->
