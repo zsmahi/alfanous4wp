@@ -18,10 +18,10 @@ namespace AlfanousWP7.Converters
             var intValue = (int) value;
             switch (intValue)
             {
-                case 0:return "الأول";
-                case 1:return "الثاني";
-                case 2:return "الثالث";
-                case 3:return "الرابع";
+                case 1:return "الأول";
+                case 2:return "الثاني";
+                case 3:return "الثالث";
+                case 4:return "الرابع";
                 default:
                     throw new ArgumentOutOfRangeException("Rubu");
             }

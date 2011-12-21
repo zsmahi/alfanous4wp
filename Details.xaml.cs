@@ -42,7 +42,8 @@ namespace AlfanousWP7
             result = Pipe.SearchResultItem;
             DataContext = result;
             textRtb.Xaml = GetFormattedText(result.Aya.Text);
-            translationRtb.Xaml = GetFormattedTranslation(result.Aya.Translation);
+            if (!string.IsNullOrWhiteSpace(result.Aya.Translation))
+                translationRtb.Xaml = GetFormattedTranslation(result.Aya.Translation);
             SetTranslationVisibility();
         }
 
@@ -66,10 +67,8 @@ namespace AlfanousWP7
 
         private string GetFormattedText(string text)
         {
-            var hightLightColor = app.CurrentTheme== DeviceTheme.Dark
-                ? "Turquoise"
-                : "DarkBlue";
-            var highlightStart = "<Run TextDecorations=\"Underline\" FontWeight=\"ExtraBlack\" Foreground=\"" + hightLightColor + "\" FlowDirection=\"LeftToRight\" >";
+            var highlightColor = app.Resources["PhoneAccentColor"].ToString();
+            var highlightStart = String.Format("<Run TextDecorations=\"Underline\" FontWeight=\"ExtraBlack\" Foreground=\"{0}\" FlowDirection=\"LeftToRight\" >", highlightColor);
             const string highlightEnd = "</Run>";
             var actualFormattedText = text.Replace("<b>", highlightStart).Replace("</b>", highlightEnd);
             var formattedText =
@@ -81,6 +80,8 @@ namespace AlfanousWP7
 
         private static string GetFormattedTranslation(string text)
         {
+            if(string.IsNullOrWhiteSpace(text))
+                return string.Empty;
             const string underlinedStart = "<Run TextDecorations=\"Underline\">";
             const string boldStart = "<Run FontWeight=\"Bold\">";
             const string italicStart = "<Run FontStyle=\"Italic\">";
