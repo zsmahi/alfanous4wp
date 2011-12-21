@@ -27,7 +27,7 @@
     								<VisualState x:Name="Disabled"/>
     							</VisualStateGroup>
     						</VisualStateManager.VisualStateGroups>
-    						<Image Source="appbar.magnify.png" Stretch="Fill"/>
+    						<Image Source="Images\appbar.magnify.png" Stretch="Fill"/>
     					</Grid>
     				</ControlTemplate>
     			</Setter.Value>

@@ -1,5 +1,4 @@
-﻿<phone:PhoneApplicationPage 
-    x:Class="AlfanousWP7.Details"
+﻿<phone:PhoneApplicationPage x:Class="AlfanousWP7.Details"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -11,95 +10,206 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
+    SupportedOrientations="Portrait"
+    Orientation="Portrait"
+    mc:Ignorable="d"
+    d:DesignHeight="696"
+    d:DesignWidth="480"
     FlowDirection="RightToLeft"
     shell:SystemTray.IsVisible="True"
-    toolkit:TiltEffect.IsTiltEnabled="True">
-
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    xmlns:my="clr-namespace:AlfanousWP7.Converters">
+    <phone:PhoneApplicationPage.Resources>
+        <my:RubuNumberToTextConverter x:Key="RubuNumberToTextConverter" />
+        <DataTemplate x:Key="ExpanderHeaderTemplate">
+            <TextBlock FontSize="35"
+                FontFamily="Times New Roman"
+                FontWeight="Bold"
+                Margin="5"
+                Text="{Binding}" />
+        </DataTemplate>
+        <Style x:Key="DetailsTextBlockStyle"
+            TargetType="TextBlock">
+            <Setter Property="FontSize"
+                Value="40" />
+            <Setter Property="FontWeight"
+                Value="Bold" />
+            <Setter Property="Margin"
+                Value="5" />
+            <Setter Property="FontFamily"
+                Value="Times New Roman" />
+        </Style>
+    </phone:PhoneApplicationPage.Resources>
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush ImageSource="/AlfanousWP7;component/Images/el-fanoos_pivot_background_blackWashed.png"/>
+        </Grid.Background>
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Margin="12,0,12,0" >
-            <controls:Pivot Title="الفانوس" Name="pivot">
+        <Grid x:Name="ContentPanel"
+            Margin="12,0,12,0">
+            <controls:Pivot Title="الفانوس"
+                Name="pivot">
                 <!--Pivot item one-->
-                <controls:PivotItem Header="الآية" FlowDirection="RightToLeft">
-                    <ScrollViewer><RichTextBox Name="textRtb" FontSize="50" FontFamily="Times New Roman" FontWeight="Bold" /></ScrollViewer>
+                <controls:PivotItem Header="الآية"
+                    FlowDirection="RightToLeft">
+                    <ScrollViewer>
+                        <RichTextBox Name="textRtb"
+                            FontSize="50"
+                            FontFamily="Times New Roman"
+                            FontWeight="Bold" />
+                    </ScrollViewer>
                 </controls:PivotItem>
 
-                <controls:PivotItem Header="تفاصيل الآية" FlowDirection="RightToLeft">
-                    <Grid Margin="20,20,5,5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Margin="5" Text="آية رقم" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
-                        <TextBlock Margin="5" Text="{Binding Aya.Id}" Grid.Column="1" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
-                        <TextBlock Margin="5" Text="صفحة" Grid.Row="1" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
-                        <TextBlock Margin="5" Text="{Binding Position.Page}" Grid.Row="1" Grid.Column="1" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
-                        <TextBlock Margin="5" Text="حزب" Grid.Row="2" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
-                        <TextBlock Margin="5" Text="{Binding Position.Hizb}" Grid.Row="2" Grid.Column="1" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
-                        <TextBlock Margin="5" Text="ربع" Grid.Row="3" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
-                        <TextBlock Margin="5" Text="{Binding Position.Rubu}" Grid.Row="3" Grid.Column="1" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
-                        <TextBlock Margin="5,15,5,5" Grid.Row="4" Grid.ColumnSpan="2" Text="{Binding Stat}" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold"
-                                   TextWrapping="Wrap">
-                            <!--الآية تحتوي على <Run Text="{Binding Stat.Letters}"/> حرفا، <Run Text="{Binding Stat.Words}"/> كلمة و <Run Text="{Binding Stat.Godnames}"/> من أسماء الله الحسنى-->
-                        </TextBlock>
-                        <TextBlock Margin="5,15,5,5" Text="{Binding Sajda}" Grid.Row="5" Grid.ColumnSpan="2" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
-                    </Grid>
+                <controls:PivotItem Header="تفاصيل الآية"
+                    FlowDirection="RightToLeft">
+                    <ScrollViewer>
+                        <Grid Margin="20,20,5,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Style="{StaticResource DetailsTextBlockStyle}"
+                                Text="آية رقم" />
+                            <TextBlock Style="{StaticResource DetailsTextBlockStyle}"
+                                Text="{Binding Aya.Id}"
+                                Grid.Column="1" />
+                            <TextBlock Style="{StaticResource DetailsTextBlockStyle}"
+                                Text="صفحة"
+                                Grid.Row="1" />
+                            <TextBlock Style="{StaticResource DetailsTextBlockStyle}"
+                                Text="{Binding Position.Page}"
+                                Grid.Row="1"
+                                Grid.Column="1"  />
+                            <TextBlock Style="{StaticResource DetailsTextBlockStyle}"
+                                Text="حزب"
+                                Grid.Row="2" />
+                            <TextBlock Style="{StaticResource DetailsTextBlockStyle}"
+                                Text="{Binding Position.Hizb}"
+                                Grid.Row="2"
+                                Grid.Column="1" />
+                            <TextBlock Style="{StaticResource DetailsTextBlockStyle}"
+                                Text="الربع"
+                                Grid.Row="3" />
+                            <TextBlock Style="{StaticResource DetailsTextBlockStyle}"
+                                Text="{Binding Path=Position.Rubu, Converter={StaticResource RubuNumberToTextConverter}}"
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                FontSize="40"
+                                FontFamily="Times New Roman"
+                                FontWeight="Bold" />
+                            <TextBlock Style="{StaticResource DetailsTextBlockStyle}"
+                                Margin="5,15,5,5"
+                                Text="{Binding Sajda}"
+                                Grid.Row="4"
+                                Grid.ColumnSpan="2" />
+                            <toolkit:ExpanderView Grid.Row="5"
+                                Grid.ColumnSpan="2"
+                                Header="إحصائيات"
+                                                  Margin="5,15,5,5"
+                                HeaderTemplate="{StaticResource ExpanderHeaderTemplate}">
+                                <TextBlock 
+                                    Text="{Binding Stat}"
+                                    TextWrapping="Wrap"
+                                    Style="{StaticResource DetailsTextBlockStyle}" />
+                            </toolkit:ExpanderView>
+                            <toolkit:ExpanderView Grid.Row="6"
+                                Grid.ColumnSpan="2"
+                                Header="موضوع الآية"
+                                                  Margin="5,15,5,5"
+                                HeaderTemplate="{StaticResource ExpanderHeaderTemplate}">
+                                <TextBlock 
+                                    Text="{Binding Theme}"
+                                    TextWrapping="Wrap"
+                                    Style="{StaticResource DetailsTextBlockStyle}" />
+                            </toolkit:ExpanderView>
+                        </Grid>
+                    </ScrollViewer>
                 </controls:PivotItem>
-                <controls:PivotItem Header="تفاصيل السورة" FlowDirection="RightToLeft">
+                <controls:PivotItem Header="تفاصيل السورة"
+                    FlowDirection="RightToLeft">
                     <Grid Margin="20,20,5,5">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
-                        <TextBlock Margin="5" Text="سورة" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
-                        <TextBlock Margin="5" Text="{Binding Sura.Name}" Grid.Column="1" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
-                        <TextBlock Margin="5" Text="{Binding Sura.Type}" Grid.Row="1" Grid.Column="1" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
-                        <TextBlock Margin="5" Text="ترتيب النزول" Grid.Row="2" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
-                        <TextBlock Margin="5" Text="{Binding Sura.Order}" Grid.Row="2" Grid.Column="1" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" />
-                        <TextBlock Margin="5,15,5,5" Text="{Binding Sura.Stat}" Grid.Row="3" Grid.ColumnSpan="2" FontSize="40" FontFamily="Times New Roman" FontWeight="Bold" 
-                                   TextWrapping="Wrap"/>
+                        <TextBlock Text="سورة"
+                            Style="{StaticResource DetailsTextBlockStyle}" />
+                        <TextBlock Text="{Binding Sura.Name}"
+                            Grid.Column="1"
+                            Style="{StaticResource DetailsTextBlockStyle}" />
+                        <TextBlock Text="{Binding Sura.Type}"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Style="{StaticResource DetailsTextBlockStyle}" />
+                        <TextBlock Text="ترتيب النزول"
+                            Grid.Row="2"
+                            Style="{StaticResource DetailsTextBlockStyle}" />
+                        <TextBlock Text="{Binding Sura.Order}"
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Style="{StaticResource DetailsTextBlockStyle}" />
+                        <TextBlock Margin="5,15,5,5"
+                            Text="{Binding Sura.Stat}"
+                            Grid.Row="3"
+                            Grid.ColumnSpan="2"
+                            Style="{StaticResource DetailsTextBlockStyle}"
+                            TextWrapping="Wrap" />
                     </Grid>
                 </controls:PivotItem>
                 
                 <!--Pivot item two-->
-                <controls:PivotItem Header="ترجمة" FlowDirection="RightToLeft" Name="translationTab" IsEnabled="True">
+                <controls:PivotItem Header="ترجمة"
+                    FlowDirection="RightToLeft"
+                    Name="translationTab"
+                    IsEnabled="True">
                     <ScrollViewer>
-                        <RichTextBox Name="translationRtb" FontSize="35" TextAlignment="Right" />
+                        <RichTextBox Name="translationRtb"
+                            FontSize="35"
+                            TextAlignment="Right" />
                     </ScrollViewer>
                 </controls:PivotItem>
             </controls:Pivot>
-            <MediaElement Name="mediaElement" Source="{Binding Aya.RecitationLink}" Grid.Row="2" Volume="5" AutoPlay="False" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        	</Grid>
+            <MediaElement Name="mediaElement"
+                Source="{Binding Aya.RecitationLink}"
+                Grid.Row="2"
+                Volume="5"
+                AutoPlay="False"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center" />
+        </Grid>
     </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="appbar.play.png" Text="Play"
-                                            Click="OnPlayButtonTap" />
-            <shell:ApplicationBarIconButton IconUri="appbar.pause.png" Text="Pause"
-                                            Click="OnPauseButtonTap" />
-            <shell:ApplicationBarIconButton IconUri="appbar.sign.stop.png" Text="Stop"
-                                            Click="OnStopButtonTap" />
+        <shell:ApplicationBar IsVisible="True"
+            IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="Images/appbar.play.png"
+                Text="Play"
+                Click="OnPlayButtonTap" />
+            <shell:ApplicationBarIconButton IconUri="Images/appbar.pause.png"
+                Text="Pause"
+                Click="OnPauseButtonTap" />
+            <shell:ApplicationBarIconButton IconUri="Images/appbar.sign.stop.png"
+                Text="Stop"
+                Click="OnStopButtonTap" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

@@ -2,9 +2,9 @@
 {
     public class Position
     {
-        public string Rubu { get; set; }
-        public string Manzil { get; set; }
-        public string Hizb { get; set; }
-        public string Page { get; set; }
+        public int Rubu { get; set; }
+        public int Manzil { get; set; }
+        public int Hizb { get; set; }
+        public int Page { get; set; }
     }
 }

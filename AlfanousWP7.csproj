@@ -80,14 +80,12 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\HighlightingConverter.cs" />
+    <Compile Include="Converters\RubuNumberToTextConverter.cs" />
     <Compile Include="Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HelperMethods.cs" />
     <Compile Include="IAlfanousSearchService.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pipe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Search.xaml.cs">
@@ -107,10 +105,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <DesignData Include="SampleData\MainViewModelSampleData.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -126,24 +120,26 @@
     <None Include="Properties\WMAppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="appbar.magnify.png" />
-    <Resource Include="appbar.magnify2.png" />
-    <Content Include="appbar.pause.png" />
-    <Content Include="appbar.play.png" />
-    <Content Include="appbar.sign.stop.png" />
-    <Content Include="ApplicationIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Background.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Images\appbar.magnify.png" />
+    <Content Include="Images\appbar.magnify2.png" />
+    <Content Include="Images\appbar.pause.png" />
+    <Content Include="Images\appbar.play.png" />
+    <Content Include="Images\appbar.sign.stop.png" />
     <Resource Include="Images\untitled.png" />
+    <EmbeddedResource Include="Images\ApplicationIcon.png" />
+    <Resource Include="Images\el-fanoos_173x173.png" />
+    <Resource Include="Images\el-fanoos_200x200.png" />
+    <Resource Include="Images\el-fanoos_99x99.png" />
+    <Resource Include="Images\el-fanoos_panorama_background_blackWashed.png" />
+    <Resource Include="Images\el-fanoos_panorama_background_whiteWashed.png" />
+    <Resource Include="Images\el-fanoos_pivot_background_blackWashed.png" />
+    <Resource Include="Images\el-fanoos_pivot_background_whiteWashed.png" />
+    <Content Include="SplashScreenImage.jpg" />
     <Content Include="Lib\Arabic.Controls.dll" />
     <Content Include="Lib\Arabic.Utils.dll" />
     <Content Include="Lib\Newtonsoft.Json.dll" />
     <Content Include="Lib\Newtonsoft.Json.pdb" />
     <Content Include="Lib\Newtonsoft.Json.xml" />
-    <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Fonts\" />

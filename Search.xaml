@@ -23,13 +23,16 @@
             <TextBlock Text="{Binding Key}" Margin="5" FontSize="30" />
         </DataTemplate>
         <my:HighlightingConverter x:Key="HighlightingConverter" />
+        <DataTemplate x:Key="ListPickerHeaderTemplate">
+            <Border Background="{StaticResource PhoneBackgroundBrush}" BorderThickness="2" BorderBrush="{StaticResource PhoneBorderBrush}" Padding="15,5" Margin="0,-10"><TextBlock FontSize="30" FontWeight="ExtraBold" Text="{Binding}" /></Border>
+        </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"
         Background="Transparent">
-        <controls:Panorama Title="الفانوس">
+        <controls:Panorama Title="الفانوس" Name="panorama">
             <controls:Panorama.Background>
-                <ImageBrush />
+                <ImageBrush ImageSource="/AlfanousWP7;component/Images/el-fanoos_panorama_background_blackWashed.png" />
             </controls:Panorama.Background>
             <controls:PanoramaItem Header="بحث">
                 <!--ContentPanel - place additional content here-->
@@ -42,7 +45,7 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
-                    <toolkit:PhoneTextBox Hint="مفردات البحث هنا ..." ActionIcon="/AlfanousWP7;component/appbar.magnify2.png" ActionIconTapped="OnSearchIconTapped" 
+                    <toolkit:PhoneTextBox Hint="مفردات البحث هنا ..." ActionIcon="/Images/appbar.magnify2.png" ActionIconTapped="OnSearchIconTapped" 
                                           Name="queryTextBox" />
                     <TextBlock Name="searchDetailsTB"
                         Grid.Row="1" />
@@ -86,12 +89,12 @@
                         DisplayMemberPath="Key"
                         FullModeHeader="الترجمات المتوفرة"
                         Name="translationListPicker"
-                        FullModeItemTemplate="{StaticResource listPickerItemTemplate}" />
+                        FullModeItemTemplate="{StaticResource listPickerItemTemplate}" HeaderTemplate="{StaticResource ListPickerHeaderTemplate}"/>
                     <toolkit:ListPicker Header="التلاوة"
                         Grid.Row="1"
                         FullModeHeader="التلاوات المتوفرة"
                         Name="recitationListPicker"
-                                        DisplayMemberPath="Value" >
+                                        DisplayMemberPath="Value" HeaderTemplate="{StaticResource ListPickerHeaderTemplate}">
                         <toolkit:ListPicker.FullModeItemTemplate>
                             <DataTemplate>
                                 <TextBlock FlowDirection="RightToLeft" Text="{Binding Value}" Margin="5" FontSize="26" />
@@ -102,7 +105,7 @@
             </controls:PanoramaItem>
         </controls:Panorama>
         <toolkit:PerformanceProgressBar Name="progressBar" 
-                                        VerticalAlignment="Top" Margin="0,280,0,0" />
+                                        VerticalAlignment="Top" Margin="0,280,0,0" IsIndeterminate="False" />
     </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->

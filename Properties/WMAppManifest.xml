@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{8ff1a5c7-ab66-4919-ab97-1cf1b852c685}" Title="AlfanousWP7" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="AlfanousWP7 author" Description="Sample description" Publisher="AlfanousWP7">
-    <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
+  <App xmlns="" ProductID="{8ff1a5c7-ab66-4919-ab97-1cf1b852c685}" Title="Alfanous" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="AlfanousWP7 author" Description="Sample description" Publisher="AlfanousWP7">
+    <IconPath IsRelative="true" IsResource="false">Images\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_GAMERSERVICES" />
       <Capability Name="ID_CAP_IDENTITY_DEVICE" />
@@ -21,9 +21,9 @@
     <Tokens>
       <PrimaryToken TokenID="AlfanousWP7Token" TaskName="_default">
         <TemplateType5>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Background.png</BackgroundImageURI>
+          <BackgroundImageURI IsRelative="true" IsResource="false">Images\el-fanoos_173x173.png</BackgroundImageURI>
           <Count>0</Count>
-          <Title>AlfanousWP7</Title>
+          <Title>Alfanous</Title>
         </TemplateType5>
       </PrimaryToken>
     </Tokens>

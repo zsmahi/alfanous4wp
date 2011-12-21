@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
+﻿using System.Windows;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
 namespace AlfanousWP7
 {
+    public enum DeviceTheme
+    {
+        Dark,
+        Light
+    }
     public partial class App : Application
     {
         private static MainViewModel viewModel = null;
@@ -41,6 +36,8 @@ namespace AlfanousWP7
         /// <returns>The root frame of the Phone Application.</returns>
         public PhoneApplicationFrame RootFrame { get; private set; }
 
+        public DeviceTheme CurrentTheme { get; set; }
+        
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>
@@ -48,6 +45,8 @@ namespace AlfanousWP7
         {
             // Global handler for uncaught exceptions. 
             UnhandledException += Application_UnhandledException;
+            var bgc = Resources["PhoneBackgroundColor"].ToString();
+            CurrentTheme = bgc == "#FF000000" ? DeviceTheme.Dark : DeviceTheme.Light;
 
             // Standard Silverlight initialization
             InitializeComponent();

@@ -112,10 +112,10 @@ namespace AlfanousWP7
                                                       },
                                           Position = new Position
                                                          {
-                                                             Hizb = position[Constants.Hizb].ToString(),
-                                                             Manzil = position[Constants.Manzil].ToString(),
-                                                             Page = position[Constants.Page].ToString(),
-                                                             Rubu = position[Constants.Rubu].ToString()
+                                                             Hizb = position[Constants.Hizb].Value<int>(),
+                                                             Manzil = position[Constants.Manzil].Value<int>(),
+                                                             Page = position[Constants.Page].Value<int>(),
+                                                             Rubu = position[Constants.Rubu].Value<int>()
                                                          },
                                           Sajda = new Sajda
                                                       {

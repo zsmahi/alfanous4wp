@@ -5,6 +5,8 @@ using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using AlfanousWP7.AlfanousClasses;
 using AlfanousWP7.Helpers;
 using Microsoft.Phone.Controls;
@@ -38,6 +40,18 @@ namespace AlfanousWP7
             Initilize();
             //AlfanousLists.ListDownloadComplete += OnListDownloadComplete;
             moreResultsButton.Tap += OnMoreResultsTap;
+            var app = (App) Application.Current;
+            var backgroundImage = app.CurrentTheme== DeviceTheme.Dark
+                ? "/AlfanousWP7;component/Images/el-fanoos_panorama_background_blackWashed.png"
+                : "/AlfanousWP7;component/Images/el-fanoos_panorama_background_whiteWashed.png";
+            panorama.Background = new ImageBrush
+                                      {
+                                          ImageSource =
+                                              new BitmapImage(
+                                              new Uri(backgroundImage,
+                                                      UriKind.Relative)),
+                                          Transform = new CompositeTransform { TranslateX = -150}
+                                      };
         }
 
         private void Initilize()
@@ -103,7 +117,7 @@ namespace AlfanousWP7
 
         private void OnResultsListBoxItemTap(object sender, GestureEventArgs e)
         {
-            var selectedAya = (SearchResultItem) resultsListBox.SelectedItem;
+            var selectedAya = resultsListBox.SelectedItem as SearchResultItem;
             if (selectedAya == null)
                 return;
             Pipe.SearchResultItem = selectedAya;

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO.IsolatedStorage;
 using System.Linq;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using AlfanousWP7.AlfanousClasses;
 using Microsoft.Phone.Controls;
@@ -10,11 +13,28 @@ namespace AlfanousWP7
     public partial class Details : PhoneApplicationPage
     {
         private SearchResultItem result;
+        private readonly App app;
 
         public Details()
         {
             InitializeComponent();
             pivot.Items.Remove(pivot.Items.Cast<PivotItem>().Single(p => p.Name == translationTab.Name));
+            app = (App)Application.Current;
+            var backgroundImage = app.CurrentTheme == DeviceTheme.Dark
+                ? "/AlfanousWP7;component/Images/el-fanoos_pivot_background_blackWashed.png"
+                : "/AlfanousWP7;component/Images/el-fanoos_pivot_background_whiteWashed.png";
+            var background = new ImageBrush
+            {
+                ImageSource =
+                    new BitmapImage(
+                    new Uri(backgroundImage,
+                            UriKind.Relative)),
+            };
+            LayoutRoot.Background = background;
+            //foreach (PivotItem pivotItem in pivot.Items)
+            //{
+            //    pivotItem.Background = background;
+            //}
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -44,9 +64,12 @@ namespace AlfanousWP7
             }
         }
 
-        private static string GetFormattedText(string text)
+        private string GetFormattedText(string text)
         {
-            const string highlightStart = "<Run TextDecorations=\"Underline\" FontWeight=\"ExtraBlack\" Foreground=\"Green\" FlowDirection=\"LeftToRight\" >";
+            var hightLightColor = app.CurrentTheme== DeviceTheme.Dark
+                ? "Turquoise"
+                : "DarkBlue";
+            var highlightStart = "<Run TextDecorations=\"Underline\" FontWeight=\"ExtraBlack\" Foreground=\"" + hightLightColor + "\" FlowDirection=\"LeftToRight\" >";
             const string highlightEnd = "</Run>";
             var actualFormattedText = text.Replace("<b>", highlightStart).Replace("</b>", highlightEnd);
             var formattedText =
