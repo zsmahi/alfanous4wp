@@ -10,14 +10,35 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait"
+    SupportedOrientations="PortraitOrLandscape"
     Orientation="Portrait"
+                            CacheMode="BitmapCache" 
     mc:Ignorable="d"
     d:DesignHeight="768"
     d:DesignWidth="480"
     shell:SystemTray.IsVisible="True"
     FlowDirection="RightToLeft"
     toolkit:TiltEffect.IsTiltEnabled="True" xmlns:my="clr-namespace:AlfanousWP7.Converters">
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
     <phone:PhoneApplicationPage.Resources>
         <DataTemplate x:Key="listPickerItemTemplate">
             <TextBlock Text="{Binding Key}" Margin="5" FontSize="30" />
@@ -74,9 +95,6 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <!--<Button Content="نتائج أخرى ..." Grid.Row="3"
-                            Name="moreResultsButton" Visibility="Collapsed"
-                            Tap="OnMoreResultsTap"/>-->
                 </Grid>
             </controls:PanoramaItem>
             <controls:PanoramaItem Header="خيارات">

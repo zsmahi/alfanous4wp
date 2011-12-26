@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Navigation;
+using AlfanousWP7.Helpers;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
@@ -123,12 +124,16 @@ namespace AlfanousWP7
                 // An unhandled exception has occurred; break into the debugger
                 System.Diagnostics.Debugger.Break();
             }
+            e.Handled = true;
+            MessageBox.Show(
+                "حدث خطأ، الرجاء إعادة المحاولة. \nفي حالة تكرار الخطأ الرجاء ارسال تقرير إلى\nabdou@student-partners.com");
         }
 
         #region Phone application initialization
 
         // Avoid double-initialization
         private bool phoneApplicationInitialized = false;
+        private PageOrientation previousOrientation;
 
         // Do not add any additional code to this method
         private void InitializePhoneApplication()
@@ -138,16 +143,28 @@ namespace AlfanousWP7
 
             // Create the frame but don't set it as RootVisual yet; this allows the splash
             // screen to remain active until the application is ready to render.
-            RootFrame = new PhoneApplicationFrame();
+            RootFrame = new TransitionFrame();
             RootFrame.Navigated += CompleteInitializePhoneApplication;
 
             // Handle navigation failures
             RootFrame.NavigationFailed += RootFrame_NavigationFailed;
 
             // Ensure we don't initialize again
-            phoneApplicationInitialized = true;
+                phoneApplicationInitialized = true;
+            RootFrame.OrientationChanged += OnRootFrameOrientationChanged;
+            previousOrientation = RootFrame.Orientation;
         }
 
+        void OnRootFrameOrientationChanged(object sender, OrientationChangedEventArgs e)
+        {
+            var newOrientation = e.Orientation;
+            var transitionElement = newOrientation.GetTransitionFrom(previousOrientation);
+            var page = (PhoneApplicationPage)((PhoneApplicationFrame)Current.RootVisual).Content;
+            var transition = transitionElement.GetTransition(page);
+            transition.Completed += (s, args) => transition.Stop();
+            transition.Begin();
+            previousOrientation = newOrientation;
+        }
         // Do not add any additional code to this method
         private void CompleteInitializePhoneApplication(object sender, NavigationEventArgs e)
         {

@@ -16,7 +16,7 @@ namespace AlfanousWP7.AlfanousClasses
             var kalimat = HelperMethods.NumberToString(Words.Value, "كلمة", "كلمتين", "كلمات");
             var asmaaAllah = GodNames == 0
                                  ? string.Empty
-                                 : string.Format("\n\tو {0} من أسماء الله الحسنى", GodNames);
+                                 : string.Format("\n\tو {0} من ألفاظ الجلالة", GodNames);
             return String.Format("{0} \n\t{1}\n\t{2}{3}", start, hourouf, kalimat, asmaaAllah);
         }
     }
