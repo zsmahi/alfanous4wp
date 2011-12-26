@@ -67,7 +67,7 @@
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     <toolkit:PhoneTextBox Hint="مفردات البحث هنا ..." ActionIcon="/Images/appbar.magnify2.png" ActionIconTapped="OnSearchIconTapped" 
-                                          Name="queryTextBox" />
+                                          Name="queryTextBox" KeyUp="OnQueryTextBoxKeyUp" />
                     <TextBlock Name="searchDetailsTB"
                         Grid.Row="1" />
                     <ListBox Grid.Row="2"

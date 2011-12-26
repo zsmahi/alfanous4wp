@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Net;
 using AlfanousWP7.AlfanousClasses;
+using AlfanousWP7.Helpers;
 using Newtonsoft.Json.Linq;
 
 namespace AlfanousWP7
@@ -72,15 +73,14 @@ namespace AlfanousWP7
                                                         UthmaniText = aya[Constants.TextUthmani].ToString(),
                                                         Text = aya[Constants.Text].ToString(),
                                                         Translation = aya[Constants.Traduction].ToString(),
-                                                        RecitationLink = aya[Constants.RecitationLink].ToString()
+                                                        RecitationLink = aya[Constants.RecitationLink].ToString().RemoveFormatting()
                                                     },
                                           Sura = new Sura
                                                      {
                                                          Id = sura[Constants.Id].Value<int?>(),
                                                          Name =
-                                                             sura[Constants.Name].ToString().Replace("<b>", "").Replace(
-                                                                 "</b>", ""),
-                                                         Type = sura[Constants.Type].ToString(),
+                                                             sura[Constants.Name].ToString().RemoveFormatting(),
+                                                         Type = sura[Constants.Type].ToString().RemoveFormatting(),
                                                          Order = sura[Constants.Order].Value<int?>(),
                                                          Stat = new SuraStat
                                                                     {
@@ -120,7 +120,7 @@ namespace AlfanousWP7
                                           Sajda = new Sajda
                                                       {
                                                           Id = sajda[Constants.Id].Value<int?>(),
-                                                          Type = sajda[Constants.Type].ToString(),
+                                                          Type = sajda[Constants.Type].ToString().RemoveFormatting(),
                                                           Exists = sajda[Constants.Exists].Value<bool>()
                                                       }
                                       }

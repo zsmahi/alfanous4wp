@@ -49,5 +49,9 @@ namespace AlfanousWP7.Helpers
             }
             return transitionElement;
         }
+        public static string RemoveFormatting(this string text)
+        {
+            return text.Replace("<b>", "").Replace("</b>", "");
+        }
     }
 }

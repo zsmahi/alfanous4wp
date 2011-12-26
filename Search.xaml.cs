@@ -5,6 +5,7 @@ using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using AlfanousWP7.AlfanousClasses;
@@ -52,6 +53,7 @@ namespace AlfanousWP7
                                                       UriKind.Relative)),
                                           Transform = new CompositeTransform { TranslateX = -150}
                                       };
+            
         }
 
         private void Initilize()
@@ -167,6 +169,12 @@ namespace AlfanousWP7
                                          if (results.HasMore)
                                              searchResults.Add(moreResultsButton);
                                      });
+        }
+
+        private void OnQueryTextBoxKeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if(e.Key==Key.Enter)
+                OnSearchIconTapped(this, null);
         }
     }
 }
