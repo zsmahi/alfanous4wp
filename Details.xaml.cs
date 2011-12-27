@@ -88,11 +88,19 @@ namespace AlfanousWP7
             const string highlightEnd = "</Run>";
             var actualFormattedText = text
                 .Replace("<b>", boldStart)
+                .Replace("<B>", boldStart)
                 .Replace("<u>", underlinedStart)
+                .Replace("<U>", underlinedStart)
                 .Replace("<i>", italicStart)
+                .Replace("<I>", italicStart)
                 .Replace("</b>", highlightEnd)
+                .Replace("</B>", highlightEnd)
                 .Replace("</u>", highlightEnd)
-                .Replace("</i>", highlightEnd);
+                .Replace("</U>", highlightEnd)
+                .Replace("</i>", highlightEnd)
+                .Replace("</I>", highlightEnd)
+                .Replace("\"><Run", "\"")
+                .Replace("</Run></Run>", "</Run>");
             var formattedText =
                 "<Section TextAlignment=\"Left\" xml:space=\"preserve\" HasTrailingParagraphBreakOnPaste=\"False\" xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"><Paragraph>" +
                 actualFormattedText +

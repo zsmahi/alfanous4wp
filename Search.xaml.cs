@@ -33,6 +33,7 @@ namespace AlfanousWP7
         private int currentPage;
 
         private ObservableCollection<object> searchResults;
+        private bool uglyWorkaround;
 
         public Search()
         {
@@ -42,18 +43,17 @@ namespace AlfanousWP7
             //AlfanousLists.ListDownloadComplete += OnListDownloadComplete;
             moreResultsButton.Tap += OnMoreResultsTap;
             var app = (App) Application.Current;
-            var backgroundImage = app.CurrentTheme== DeviceTheme.Dark
-                ? "/AlfanousWP7;component/Images/el-fanoos_panorama_background_blackWashed.png"
-                : "/AlfanousWP7;component/Images/el-fanoos_panorama_background_whiteWashed.png";
+            var backgroundImage = app.CurrentTheme == DeviceTheme.Dark
+                                      ? "/AlfanousWP7;component/Images/el-fanoos_panorama_background_blackWashed.png"
+                                      : "/AlfanousWP7;component/Images/el-fanoos_panorama_background_whiteWashed.png";
             panorama.Background = new ImageBrush
                                       {
                                           ImageSource =
                                               new BitmapImage(
                                               new Uri(backgroundImage,
                                                       UriKind.Relative)),
-                                          Transform = new CompositeTransform { TranslateX = -150}
+                                          Transform = new CompositeTransform {TranslateX = -150}
                                       };
-            
         }
 
         private void Initilize()
@@ -66,10 +66,10 @@ namespace AlfanousWP7
             recitationListPicker.SelectionChanged += OnRecitationChanged;
         }
 
-        private void OnListDownloadComplete(object sender, EventArgs e)
-        {
-            Initilize();
-        }
+        //private void OnListDownloadComplete(object sender, EventArgs e)
+        //{
+        //    Initilize();
+        //}
 
         private void LoadSettings()
         {
@@ -85,36 +85,52 @@ namespace AlfanousWP7
             if (IsolatedStorageSettings.ApplicationSettings.Contains(RecitationSettingsKey))
             {
                 var recitationKey = (string) IsolatedStorageSettings.ApplicationSettings[RecitationSettingsKey];
-                recitationListPicker.SelectedItem = AlfanousLists.Recitations.Single(item=>item.Key== recitationKey);
+                recitationListPicker.SelectedItem = AlfanousLists.Recitations.Single(item => item.Key == recitationKey);
                 searchService.Recitation = recitationKey;
             }
         }
 
         private void OnSearchIconTapped(object sender, EventArgs e)
         {
+            resultsListBox.Focus();
             currentPage = 1;
             var searchTerm = queryTextBox.Text;
             progressBar.IsIndeterminate = true;
-            searchService.Search(searchTerm, currentPage, results =>
-            {
-                progressBar.IsIndeterminate = false;
-                if (results.HasError)
-                {
-                    searchDetailsTB.Text = "حدث خطأ، الرجاء إعادة المحاولة ...";
-                    return;
-                }
-                if (results.SearchResultItems == null || results.SearchResultItems.Count() == 0)
-                {
-                    searchDetailsTB.Text = "لا توجد أية نتائج للبحث ...";
-                    return;
-                }
-                var formattedToal = HelperMethods.NumberToString(results.TotalResultCount, "نتيجة", "نتيجتان", "نتائج");
-                searchDetailsTB.Text = String.Format("تم تحميل {0} من {1}", results.LastFetched, formattedToal);
-                searchResults = new ObservableCollection<object>(results.SearchResultItems.Cast<object>());
-                resultsListBox.ItemsSource = searchResults;
-                if (results.HasMore)
-                    searchResults.Add(moreResultsButton);
-            });
+            uglyWorkaround = true;
+            moreResultsButton.IsEnabled = false;
+            searchService.Search(searchTerm,
+                                 currentPage,
+                                 results =>
+                                     {
+                                         moreResultsButton.IsEnabled = true;
+                                         progressBar.IsIndeterminate = false;
+                                         if (results.HasError)
+                                         {
+                                             searchDetailsTB.Text =
+                                                 "حدث خطأ، الرجاء إعادة المحاولة ...";
+                                             return;
+                                         }
+                                         if (results.SearchResultItems == null ||
+                                             results.SearchResultItems.Count() == 0)
+                                         {
+                                             searchDetailsTB.Text =
+                                                 "لا توجد أية نتائج للبحث ...";
+                                             return;
+                                         }
+                                         var formattedToal =
+                                             HelperMethods.NumberToString(
+                                                 results.TotalResultCount, "نتيجة", "نتيجتان",
+                                                 "نتائج");
+                                         searchDetailsTB.Text =
+                                             String.Format("تم تحميل {0} من {1}",
+                                                           results.LastFetched, formattedToal);
+                                         searchResults =
+                                             new ObservableCollection<object>(
+                                                 results.SearchResultItems.Cast<object>());
+                                         resultsListBox.ItemsSource = searchResults;
+                                         if (results.HasMore)
+                                             searchResults.Add(moreResultsButton);
+                                     });
         }
 
         private void OnResultsListBoxItemTap(object sender, GestureEventArgs e)
@@ -140,7 +156,7 @@ namespace AlfanousWP7
         {
             if (recitationListPicker.ItemsSource == null)
                 return;
-            var recitationKey = ((KeyValuePair<string,string>) recitationListPicker.SelectedItem).Key;
+            var recitationKey = ((KeyValuePair<string, string>) recitationListPicker.SelectedItem).Key;
             searchService.Recitation = recitationKey;
             IsolatedStorageSettings.ApplicationSettings[RecitationSettingsKey] = recitationKey;
         }
@@ -150,11 +166,14 @@ namespace AlfanousWP7
             moreResultsButton.Content = "جاري التحميل ...";
             moreResultsButton.IsEnabled = false;
             progressBar.IsIndeterminate = true;
+            uglyWorkaround = false;
             currentPage++;
             searchService.Search(queryTextBox.Text,
                                  currentPage,
                                  results =>
                                      {
+                                         if (uglyWorkaround)
+                                             return;
                                          progressBar.IsIndeterminate = false;
                                          moreResultsButton.Content = LoadMoreResultsString;
                                          moreResultsButton.IsEnabled = true;
@@ -162,18 +181,19 @@ namespace AlfanousWP7
                                          foreach (var item in results.SearchResultItems)
                                              searchResults.Add(item);
                                          var formattedToal =
-                                             HelperMethods.NumberToString( results.TotalResultCount, "نتيجة","نتيجتان", "نتائج");
-                                         searchDetailsTB.Text =String.Format("تم تحميل {0} من {1}",
-                                                           results.LastFetched,
-                                                           formattedToal);
+                                             HelperMethods.NumberToString(results.TotalResultCount, "نتيجة", "نتيجتان",
+                                                                          "نتائج");
+                                         searchDetailsTB.Text = String.Format("تم تحميل {0} من {1}",
+                                                                              results.LastFetched,
+                                                                              formattedToal);
                                          if (results.HasMore)
                                              searchResults.Add(moreResultsButton);
                                      });
         }
 
-        private void OnQueryTextBoxKeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void OnQueryTextBoxKeyUp(object sender, KeyEventArgs e)
         {
-            if(e.Key==Key.Enter)
+            if (e.Key == Key.Enter)
                 OnSearchIconTapped(this, null);
         }
     }
