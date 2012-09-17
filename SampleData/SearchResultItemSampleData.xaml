@@ -1,0 +1,24 @@
+<AlfanousWP7:SearchResultItem xmlns:AlfanousWP7="clr-namespace:AlfanousWP7" xmlns:AlfanousWP7_AlfanousClasses="clr-namespace:AlfanousWP7.AlfanousClasses" Id="Curae adipiscing cras">
+	<AlfanousWP7:SearchResultItem.Aya>
+		<AlfanousWP7_AlfanousClasses:Aya RecitationLink="Nam sed" Translation="Vestibulum class" UthmaniText="Aenean maecenas dis mauris nullam"/>
+	</AlfanousWP7:SearchResultItem.Aya>
+	<AlfanousWP7:SearchResultItem.Position>
+		<AlfanousWP7_AlfanousClasses:Position Hizb="Parturient aliquam curabitur" Manzil="Vestibulum integer donec phasellus" Page="Etiam praesent" Rubu="Quisque aptent vivamus"/>
+	</AlfanousWP7:SearchResultItem.Position>
+	<AlfanousWP7:SearchResultItem.Sajda>
+		<AlfanousWP7_AlfanousClasses:Sajda Exists="True" Type="Vestibulum aliquam accumsan"/>
+	</AlfanousWP7:SearchResultItem.Sajda>
+	<AlfanousWP7:SearchResultItem.Stat>
+		<AlfanousWP7_AlfanousClasses:Stat/>
+	</AlfanousWP7:SearchResultItem.Stat>
+	<AlfanousWP7:SearchResultItem.Sura>
+		<AlfanousWP7_AlfanousClasses:Sura Name="Bibendum aliquet auctor" Type="Congue adipiscing duis parturient est">
+			<AlfanousWP7_AlfanousClasses:Sura.Stat>
+				<AlfanousWP7_AlfanousClasses:SuraStat/>
+			</AlfanousWP7_AlfanousClasses:Sura.Stat>
+		</AlfanousWP7_AlfanousClasses:Sura>
+	</AlfanousWP7:SearchResultItem.Sura>
+	<AlfanousWP7:SearchResultItem.Theme>
+		<AlfanousWP7_AlfanousClasses:Theme Chapter="Blandit hac" SubTopic="Nunc leo amet commodo dictumst" Topic="Vestibulum cursus mus vestibulum"/>
+	</AlfanousWP7:SearchResultItem.Theme>
+</AlfanousWP7:SearchResultItem>

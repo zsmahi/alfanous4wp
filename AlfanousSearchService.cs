@@ -23,7 +23,7 @@ namespace AlfanousWP7
         }
         private string GetQueryUrl(string searchTerm, int page)
         {
-            return string.Format("http://www.alfanous.org/json?search={0}&sortedby=mushaf{1}&recitation={2}&highlight=bold&page={3}", 
+            return string.Format("http://www.alfanous.org/json?search={0}&sortedby=mushaf{1}&recitation={2}&highlight=bold&page={3}",
                        searchTerm, 
                        GetTranslation(), 
                        Recitation,

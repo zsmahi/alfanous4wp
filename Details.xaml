@@ -47,7 +47,7 @@
                 FontFamily="Times New Roman"
                 FontWeight="Bold"
                 Margin="5"
-                Text="{Binding}" />
+                Text="{Binding}" Foreground="{StaticResource PhoneAccentBrush}" />
         </DataTemplate>
         <Style x:Key="DetailsTextBlockStyle"
             TargetType="TextBlock">
