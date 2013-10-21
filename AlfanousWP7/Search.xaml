@@ -11,14 +11,9 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="PortraitOrLandscape"
-    Orientation="Portrait"
-                            CacheMode="BitmapCache" 
-    mc:Ignorable="d"
-    d:DesignHeight="768"
-    d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True"
-    FlowDirection="RightToLeft"
-    toolkit:TiltEffect.IsTiltEnabled="True" xmlns:my="clr-namespace:AlfanousWP7.Converters">
+    Orientation="Portrait" CacheMode="BitmapCache" 
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480" shell:SystemTray.IsVisible="True" FlowDirection="RightToLeft"    
+toolkit:TiltEffect.IsTiltEnabled="True" xmlns:my="clr-namespace:AlfanousWP7.Converters">
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
             <toolkit:NavigationInTransition.Backward>
@@ -35,7 +30,7 @@
                 <toolkit:TurnstileTransition Mode="BackwardOut"/>
             </toolkit:NavigationOutTransition.Backward>
             <toolkit:NavigationOutTransition.Forward>
-                <toolkit:TurnstileTransition Mode="ForwardOut"/>
+                <toolkit:TurnstileTransition Mode="ForwardOut" />
             </toolkit:NavigationOutTransition.Forward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
@@ -65,7 +60,7 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
+                    </Grid.RowDefinitions>             
                     <toolkit:PhoneTextBox Hint="مفردات البحث هنا ..." ActionIcon="/Images/appbar.magnify2.png" ActionIconTapped="OnSearchIconTapped" 
                                           Name="queryTextBox" KeyUp="OnQueryTextBoxKeyUp" />
                     <TextBlock Name="searchDetailsTB"
